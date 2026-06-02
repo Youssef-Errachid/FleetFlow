@@ -2,24 +2,27 @@ package org.fleetflow.fleetflow.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
+@SuperBuilder
 @Table(name = "chauffeur")
-public class Chauffeur {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@PrimaryKeyJoinColumn(name = "user_id")
+public class Chauffeur extends User {
+
     private String nom;
+
     private String telephone;
+
     private String licenseType;
-    private Boolean available;
+
+    private Boolean available = true;
 
     @OneToMany(mappedBy = "chauffeur")
     private List<Livraison> livraisons;
