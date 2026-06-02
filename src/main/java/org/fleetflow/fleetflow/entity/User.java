@@ -55,27 +55,3 @@ public class User implements UserDetails {
     }
 
 }
-
-git add pom.xml
-git commit -m " add JWT dependencies (jjwt)"
-
-git add src/main/java/org/fleetflow/fleetflow/entity/User.java
-git commit -m " add password hashing and validation to User entity"
-
-git add src/main/java/org/fleetflow/fleetflow/dto/AuthRequest.java
-git commit -m " create AuthRequest DTO with validation"
-
-git add src/main/java/org/fleetflow/fleetflow/dto/AuthResponse.java
-git commit -m " create AuthResponse and AuthRequest DTO for API "
-
-git add src/main/java/org/fleetflow/fleetflow/repository/UserRepository.java
-git commit -m " create UserRepository"
-
-git add src/main/java/org/fleetflow/fleetflow/security/
-git commit -m " add JWT utilities and security configuration"
-
-git add src/main/java/org/fleetflow/fleetflow/service/AuthService.java
-git commit -m " create AuthService with registration and login logic"
-
-git add src/main/java/org/fleetflow/fleetflow/controller/AuthController.java
-git commit -m " create AuthController with authentication endpoints"
