@@ -25,17 +25,26 @@ class ClientServiceTest {
 
     @Test
     void ajouterClient() {
-        ClientDTO clientDTO=new ClientDTO("soufiane", "test@mail.com", "060000", "Casa");
-        Client client=new Client(1L,"soufiane", "test@mail.com", "060000", "Casa",null);
 
-        Mockito.when(clientRepository.save(Mockito.any())).thenReturn(client);
+        ClientDTO clientDTO = new ClientDTO(
+                "soufiane",
+                "test@mail.com",
+                "060000",
+                "Casa"
+        );
+
+        Client client = new Client();
+        client.setNom("soufiane");
+        client.setTelephone("060000");
+        client.setVille("Casa");
+
         Mockito.when(clientMapper.toEntity(clientDTO)).thenReturn(client);
+        Mockito.when(clientRepository.save(Mockito.any(Client.class))).thenReturn(client);
         Mockito.when(clientMapper.toDTO(client)).thenReturn(clientDTO);
 
-        ClientDTO result=clientService.ajouterClient(clientDTO);
+        ClientDTO result = clientService.ajouterClient(clientDTO);
 
-        assertEquals("soufiane",result.getNom());
-
+        assertEquals("soufiane", result.getNom());
     }
 
     @Test
