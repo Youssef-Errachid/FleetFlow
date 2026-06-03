@@ -7,6 +7,10 @@ import org.fleetflow.fleetflow.entity.Chauffeur;
 import org.fleetflow.fleetflow.mapper.ChauffeurMapper;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,8 +43,21 @@ public class ChauffeurService {
         chauffeurRepository.deleteById(id);
     }
 
-    public List<ChauffeurDTO> listerChauffeurs(){
-        return chauffeurMapper.toDtoList(chauffeurRepository.findAll());
+    public Page<ChauffeurDTO> listerChauffeurs(int page , int size ,String sortBy,String sortDir){
+
+        List<String> allowedSortField = List.of("id","nom","telephone","ville");
+
+        if(!allowedSortField.contains(sortBy)){
+            sortBy = "id";
+        }
+        boolean isAsc = "asc".equalsIgnoreCase(sortDir);
+
+        Sort sort = isAsc
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return chauffeurRepository.findAll(pageable).map(chauffeurMapper::toDTO);
     }
 
 public List<ChauffeurDTO> listerChauffeursDisponibles(){
