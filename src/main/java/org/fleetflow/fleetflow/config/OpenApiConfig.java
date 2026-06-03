@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(
-        info = @Info(title = "Healthcare+ MEDICAL MANAGEMENT SYSTEM API", version = "part-2"),
+        info = @Info(title = "FLEETFLOW - GESTION DES LIVRAISONS : API SYSTÈME", version = "part-5"),
         security = @SecurityRequirement(name = "bearerAuth"),
         tags = {
                 @Tag(name = "Authentication", description = "User login and registration")
