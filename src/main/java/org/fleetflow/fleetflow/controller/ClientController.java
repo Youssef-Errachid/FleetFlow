@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.ClientDTO;
 import org.fleetflow.fleetflow.service.ClientService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,8 +47,8 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
     @GetMapping
     @Operation(summary = "Lister tous les clients")
-    public ResponseEntity<List<ClientDTO>> lister() {
-        return ResponseEntity.ok(clientService.listerClients());
+    public ResponseEntity<Page<ClientDTO>> lister(@RequestParam int page, @RequestParam int size, @RequestParam String sortBy , @RequestParam String sortDir) {
+        return ResponseEntity.ok(clientService.listerClients(page,size,sortBy,sortDir));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
