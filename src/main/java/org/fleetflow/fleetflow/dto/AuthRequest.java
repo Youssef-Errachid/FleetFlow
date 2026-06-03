@@ -25,6 +25,5 @@ public class AuthRequest {
     @Size(min = 8, message = "Password must be at least 8 characters")
     private String password;
 
-    @NotBlank(message = "The Role is required")
     private Role role;
 }
