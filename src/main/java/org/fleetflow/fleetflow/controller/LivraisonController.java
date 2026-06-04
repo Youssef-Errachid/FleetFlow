@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
 import org.fleetflow.fleetflow.service.LivraisonService;
+import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,8 +55,9 @@ public class LivraisonController {
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     @GetMapping
     @Operation(summary = "Lister toutes les livraisons")
-    public ResponseEntity<List<LivraisonDTO>> lister() {
-        return ResponseEntity.ok(livraisonService.listerLivraisons());
+    public ResponseEntity<Page<LivraisonDTO>> lister(@RequestParam int page, @RequestParam int size, @RequestParam String sortBy , @RequestParam String sortDir) {
+
+        return ResponseEntity.ok(livraisonService.listerLivraisons(page,size,sortBy,sortDir));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")

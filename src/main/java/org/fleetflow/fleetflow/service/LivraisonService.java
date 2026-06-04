@@ -9,6 +9,10 @@ import org.fleetflow.fleetflow.mapper.LivraisonMapper;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -44,8 +48,19 @@ public class LivraisonService {
         return livraisonMapper.toDTO(livraisonRepository.save(livraison));
     }
 
-public List<LivraisonDTO> listerLivraisons(){
-        return livraisonMapper.toDtoList(livraisonRepository.findAll());
+public Page<LivraisonDTO> listerLivraisons(int page, int size, String sortBy, String sortDir){
+        List<String> allowedSortField = List.of("id","dateLivraison","statut");
+        if(!allowedSortField.contains(sortBy)){
+            sortBy = "id";
+        }
+
+        Boolean isAsc  = "asc".equalsIgnoreCase(sortDir);
+
+        Sort.Direction sortDirection =  isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
+
+        Pageable pageable = PageRequest.of(page,size,Sort.by(sortDirection,sortBy));
+
+        return livraisonRepository.findAll(pageable).map(livraisonMapper::toDTO);
 }
 
 public List<LivraisonDTO> listerParStatut(String statut){
