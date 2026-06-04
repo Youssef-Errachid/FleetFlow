@@ -32,7 +32,6 @@ public class ClientService implements org.fleetflow.fleetflow.service.ClientServ
 
         Client client = clientMapper.toEntity(dto);
         client.setUsername(dto.getUsername());
-        client.setEmail(dto.getEmail());
         client.setRole(Role.CLIENT);
 
         client.setHashedPassword(dto.getPassword());

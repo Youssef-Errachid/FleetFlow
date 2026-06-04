@@ -1,4 +1,3 @@
-// AuthRequest.java
 package org.fleetflow.fleetflow.dto;
 
 import jakarta.validation.constraints.Email;
@@ -14,7 +13,7 @@ import org.fleetflow.fleetflow.entity.Role;
 @Builder
 public class AuthRequest {
 
-    @NotBlank(message = "user name is required")
+    @NotBlank(message = "Username is required")
     private String username;
 
     @NotBlank(message = "Email is required")
@@ -26,4 +25,12 @@ public class AuthRequest {
     private String password;
 
     private Role role;
+
+    private String nom;
+
+    private String telephone;
+
+    private String ville;
+
+    private String licenseType;
 }

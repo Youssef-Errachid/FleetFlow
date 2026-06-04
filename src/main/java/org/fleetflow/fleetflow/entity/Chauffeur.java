@@ -22,6 +22,7 @@ public class Chauffeur extends User {
 
     private String licenseType;
 
+    @Builder.Default
     private Boolean available = true;
 
     @OneToMany(mappedBy = "chauffeur")

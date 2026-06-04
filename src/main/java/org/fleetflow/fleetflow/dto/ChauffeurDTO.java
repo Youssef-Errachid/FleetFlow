@@ -14,6 +14,8 @@ public class ChauffeurDTO {
 
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
+    @NotBlank(message = "user name est obligatoire")
+    private String username;
     @NotBlank(message = "Le téléphone est obligatoire")
     private String telephone;
 
@@ -22,5 +24,8 @@ public class ChauffeurDTO {
 
     @NotNull(message = "La disponibilité est obligatoire")
     private Boolean available;
+
+    @NotNull
+    private String password;
 
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.ChauffeurDTO;
 import org.fleetflow.fleetflow.entity.Chauffeur;
+import org.fleetflow.fleetflow.entity.Role;
 import org.fleetflow.fleetflow.mapper.ChauffeurMapper;
 import org.fleetflow.fleetflow.repository.ChauffeurRepository;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
@@ -25,6 +26,9 @@ public class ChauffeurService implements org.fleetflow.fleetflow.service.Chauffe
 
     public ChauffeurDTO ajouterChauffeur(ChauffeurDTO dto) {
         Chauffeur chauffeur = chauffeurMapper.toEntity(dto);
+        chauffeur.setUsername(dto.getUsername());
+        chauffeur.setPassword(dto.getPassword());
+        chauffeur.setRole(Role.DRIVER);
         return chauffeurMapper.toDTO(chauffeurRepository.save(chauffeur));
     }
 
