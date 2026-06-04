@@ -28,9 +28,11 @@ class ClientServiceTest {
 
         ClientDTO clientDTO = new ClientDTO(
                 "soufiane",
+                "sisi",
                 "test@mail.com",
                 "060000",
-                "Casa"
+                "Casa",
+                "1122334455"
         );
 
         Client client = new Client();
@@ -49,7 +51,7 @@ class ClientServiceTest {
 
     @Test
     void ajouterClient_emailExiste() {
-        ClientDTO clientDTO = new ClientDTO("soufiane", "test@mail.com", "060000", "Casa");
+        ClientDTO clientDTO = new ClientDTO("soufiane","sisi", "test@mail.com", "060000", "Casa","1122334455");
 
         Mockito.when(clientRepository.existsByEmail("test@mail.com")).thenReturn(true);
         RuntimeException exception=assertThrows(RuntimeException.class,()->{

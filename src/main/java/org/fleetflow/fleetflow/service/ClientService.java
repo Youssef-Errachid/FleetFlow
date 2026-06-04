@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.ClientDTO;
 import org.fleetflow.fleetflow.dto.LivraisonDTO;
 import org.fleetflow.fleetflow.entity.Client;
+import org.fleetflow.fleetflow.entity.Role;
 import org.fleetflow.fleetflow.mapper.ClientMapper;
 import org.fleetflow.fleetflow.repository.ClientRepository;
 import org.fleetflow.fleetflow.repository.LivraisonRepository;
@@ -31,6 +32,11 @@ public class ClientService {
         }
 
         Client client = clientMapper.toEntity(dto);
+        client.setUsername(dto.getUsername());
+        client.setEmail(dto.getEmail());
+        client.setRole(Role.CLIENT);
+
+        client.setHashedPassword(dto.getPassword());
         return clientMapper.toDTO(clientRepository.save(client));
     }
 
