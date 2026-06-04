@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.VehiculeDTO;
-import org.fleetflow.fleetflow.service.VehiculeService;
+import org.fleetflow.fleetflow.service.VehicleService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import java.util.List;
 @Tag(name = "Gestion des Véhicules")
 public class VehiculeController {
 
-    private final VehiculeService vehiculeService;
+    private final VehicleService vehiculeService;
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping

@@ -5,6 +5,7 @@ import org.fleetflow.fleetflow.dto.VehiculeDTO;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
+import org.fleetflow.fleetflow.service.impl.VehiculeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

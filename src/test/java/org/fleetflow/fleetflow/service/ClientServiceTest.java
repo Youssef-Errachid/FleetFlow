@@ -4,6 +4,7 @@ import org.fleetflow.fleetflow.dto.ClientDTO;
 import org.fleetflow.fleetflow.entity.Client;
 import org.fleetflow.fleetflow.mapper.ClientMapper;
 import org.fleetflow.fleetflow.repository.ClientRepository;
+import org.fleetflow.fleetflow.service.impl.ClientService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

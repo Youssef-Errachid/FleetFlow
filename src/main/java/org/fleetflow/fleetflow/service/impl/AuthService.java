@@ -1,4 +1,4 @@
-package org.fleetflow.fleetflow.service;
+package org.fleetflow.fleetflow.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.AuthRequest;
@@ -6,11 +6,12 @@ import org.fleetflow.fleetflow.dto.AuthResponse;
 import org.fleetflow.fleetflow.entity.User;
 import org.fleetflow.fleetflow.repository.UserRepository;
 import org.fleetflow.fleetflow.security.JwtService;
+import org.fleetflow.fleetflow.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthService implements UserService {
     private final UserRepository userRepository;
     private final JwtService jwtUtil;
 

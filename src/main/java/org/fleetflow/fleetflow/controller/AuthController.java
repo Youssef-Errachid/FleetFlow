@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.AuthRequest;
 import org.fleetflow.fleetflow.dto.AuthResponse;
-import org.fleetflow.fleetflow.service.AuthService;
+import org.fleetflow.fleetflow.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Authentication", description = "User registration and login")
 public class AuthController {
 
-    private final AuthService userService;
+    private final UserService userService;
 
     @PostMapping("/register")
     @Operation(summary = "Register a new user")

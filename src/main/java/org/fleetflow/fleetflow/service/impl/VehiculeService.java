@@ -1,4 +1,4 @@
-package org.fleetflow.fleetflow.service;
+package org.fleetflow.fleetflow.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -6,6 +6,7 @@ import org.fleetflow.fleetflow.dto.VehiculeDTO;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
+import org.fleetflow.fleetflow.service.VehicleService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,11 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class VehiculeService {
+public class VehiculeService implements VehicleService {
 
     private final VehiculeRepository vehiculeRepository;
     private final VehiculeMapper vehiculeMapper;
