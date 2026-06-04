@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.fleetflow.fleetflow.dto.VehiculeDTO;
 import org.fleetflow.fleetflow.service.VehiculeService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,8 +46,8 @@ public class VehiculeController {
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     @GetMapping
     @Operation(summary = "Lister tous les véhicules")
-    public ResponseEntity<List<VehiculeDTO>> lister() {
-        return ResponseEntity.ok(vehiculeService.listerVehicules());
+    public ResponseEntity<Page<VehiculeDTO>> lister(@RequestParam int page, @RequestParam int size, @RequestParam String sortBy , @RequestParam String sortDir) {
+        return ResponseEntity.ok(vehiculeService.listerVehicules(page,size,sortBy,sortDir));
     }
 
 

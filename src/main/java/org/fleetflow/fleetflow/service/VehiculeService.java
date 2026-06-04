@@ -6,6 +6,10 @@ import org.fleetflow.fleetflow.dto.VehiculeDTO;
 import org.fleetflow.fleetflow.entity.Vehicule;
 import org.fleetflow.fleetflow.mapper.VehiculeMapper;
 import org.fleetflow.fleetflow.repository.VehiculeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +44,18 @@ public class VehiculeService {
         vehiculeRepository.deleteById(id);
     }
 
-    public List<VehiculeDTO>listerVehicules(){
-        return vehiculeMapper.toDtoList(vehiculeRepository.findAll());
+    public Page<VehiculeDTO> listerVehicules(int page, int size, String sortBy, String sortDir){
+        List<String> allowedSortField = List.of("id","disponible","matricule");
+        if(!allowedSortField.contains(sortBy)){
+            sortBy = "id";
+        }
+
+        Boolean isAsc  = "asc".equalsIgnoreCase(sortDir);
+
+        Sort.Direction sortDirection =  isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
+
+        Pageable pageable = PageRequest.of(page,size,Sort.by(sortDirection,sortBy));
+        return vehiculeRepository.findAll(pageable).map(vehiculeMapper::toDTO);
     }
 
 public List<VehiculeDTO> listerParStatut(String statut){

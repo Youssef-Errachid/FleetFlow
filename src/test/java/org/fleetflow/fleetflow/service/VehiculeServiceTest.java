@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -128,9 +129,12 @@ class VehiculeServiceTest {
         when(vehiculeRepository.findAll()).thenReturn(vehicules);
         when(vehiculeMapper.toDtoList(vehicules)).thenReturn(dtos);
 
-        List<VehiculeDTO> result = vehiculeService.listerVehicules();
+        Page<VehiculeDTO> result = vehiculeService.listerVehicules(      0,
+                10,
+                "id",
+                "asc");
 
-        assertEquals(1, result.size());
+        assertEquals(1, result.getContent().size());
 
         verify(vehiculeRepository).findAll();
         verify(vehiculeMapper).toDtoList(vehicules);
