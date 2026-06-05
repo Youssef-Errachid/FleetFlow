@@ -2,6 +2,8 @@ package org.fleetflow.fleetflow.security.config;
 
 
 import lombok.RequiredArgsConstructor;
+import org.fleetflow.fleetflow.exception.CustomAccessDeniedHandler;
+import org.fleetflow.fleetflow.exception.CustomAuthenticationEntryPoint;
 import org.fleetflow.fleetflow.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsService userDetailsService;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
@@ -46,6 +50,10 @@ public class SecurityConfig {
 
                 .authenticationProvider(authenticationProvider())
 
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
+                )
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
