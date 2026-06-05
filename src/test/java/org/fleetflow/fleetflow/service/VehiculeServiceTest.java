@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -124,20 +126,28 @@ class VehiculeServiceTest {
 
     @Test
     void testListerVehicules() {
+
         List<Vehicule> vehicules = List.of(vehicule);
         List<VehiculeDTO> dtos = List.of(vehiculeDTO);
 
-        when(vehiculeRepository.findAll()).thenReturn(vehicules);
-        when(vehiculeMapper.toDtoList(vehicules)).thenReturn(dtos);
+        Page<Vehicule> page = new PageImpl<>(vehicules);
 
-        Page<VehiculeDTO> result = vehiculeService.listerVehicules(      0,
+        when(vehiculeRepository.findAll(any(Pageable.class)))
+                .thenReturn(page);
+
+        when(vehiculeMapper.toDtoList(vehicules))
+                .thenReturn(dtos);
+
+        Page<VehiculeDTO> result = vehiculeService.listerVehicules(
+                0,
                 10,
                 "id",
-                "asc");
+                "asc"
+        );
 
         assertEquals(1, result.getContent().size());
 
-        verify(vehiculeRepository).findAll();
+        verify(vehiculeRepository).findAll(any(Pageable.class));
         verify(vehiculeMapper).toDtoList(vehicules);
     }
 
