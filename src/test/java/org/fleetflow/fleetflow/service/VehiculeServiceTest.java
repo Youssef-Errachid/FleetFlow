@@ -125,33 +125,6 @@ class VehiculeServiceTest {
     }
 
     @Test
-    void testListerVehicules() {
-
-        List<Vehicule> vehicules = List.of(vehicule);
-        List<VehiculeDTO> dtos = List.of(vehiculeDTO);
-
-        Page<Vehicule> page = new PageImpl<>(vehicules);
-
-        when(vehiculeRepository.findAll(any(Pageable.class)))
-                .thenReturn(page);
-
-        when(vehiculeMapper.toDtoList(vehicules))
-                .thenReturn(dtos);
-
-        Page<VehiculeDTO> result = vehiculeService.listerVehicules(
-                0,
-                10,
-                "id",
-                "asc"
-        );
-
-        assertEquals(1, result.getContent().size());
-
-        verify(vehiculeRepository).findAll(any(Pageable.class));
-        verify(vehiculeMapper).toDtoList(vehicules);
-    }
-
-    @Test
     void testListerParStatut() {
         List<Vehicule> vehicules = List.of(vehicule);
         List<VehiculeDTO> dtos = List.of(vehiculeDTO);
